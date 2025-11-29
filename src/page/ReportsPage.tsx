@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { generateDailyAnalysis, getLatestAnalysis, getUser } from '../api';
+import { getUsername } from '../context';
 
 export default function ReportsPage() {
     const [report,      setReport] = useState<string>('');
@@ -8,37 +10,23 @@ export default function ReportsPage() {
     const fetchReport = async () => {
         setIsLoading(true);
         setError(null);
-        
         try {
-            // TODO: Replace with your actual Gemini AI API endpoint
-            const response = await fetch('/api/generate-report', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                // Add any necessary parameters for your Gemini AI request
-                body: JSON.stringify({
-                    // Add your request parameters here
-                }),
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch report');
-            }
-
-            const data = await response.json();
-            setReport(data.report || data.text || '');
-        } catch (err) {
-            setError(err instanceof Error ? err.message : 'An error occurred');
-            console.error('Error fetching report:', err);
+            const response = await getLatestAnalysis(getUsername());
+            console.log(response)
+            setReport(response.lastReport?.rawContent || '');
+        } catch {
+            setError('An error occurred');
         } finally {
             setIsLoading(false);
         }
     };
 
     useEffect(() => {
-        
-    });
+        generateDailyAnalysis(getUsername())
+            .then(x=>setReport(x.rawContent || ''))
+            .catch(()=>setError("An error occured"));
+    
+    }, []);
 
     return (
         <div className="w-full min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 p-8">
