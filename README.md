@@ -1,50 +1,74 @@
-# React + TypeScript + Vite
+# Rockets: Gamified Productivity Tracking (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+**Rockets** is a simple web (or mobile) application designed to help users **track their daily habits** and stay motivated through **gamification**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Inspired by the needs of students, the application allows users to transform regular tasks like studying, sleeping, or reading into streak challenges and rewards, encouraging consistency and the establishment of solid routines.
 
-## Expanding the ESLint configuration
+This repository contains the source code for the User Interface (Frontend) of the application, developed using [**React Vite**].
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Key Features (Based on Constraints)
 
-- Configure the top-level `parserOptions` property like this:
+The application aims to implement the following features to meet the project criteria:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+* **Simple Habit Logging:** Users can log daily activities (Studies, Sleep, Exercise, Reading, etc.) with a clear and intuitive user interface.
+* **Progress Tracking via Streaks:** Visualization of consecutive days of habit completion through a dashboard.
+* **Basic Rewards:** Display of simple, easy-to-understand rewards based on achieving milestones.
+* **Optional Reminders (Future):** Capability to integrate notifications to encourage daily logging.
+* **Streak Simulator:** The demo allows logging entries for past days to quickly simulate streaks and visualize rewards.
+
+## Technologies Used
+
+| Category | Technology | Description |
+| :--- | :--- | :--- |
+| **Framework/Lib** | [Example: React] | Main library for building the user interface. |
+| **Language** | TypeScript (or JavaScript) | Ensures code robustness and scalability. |
+| **Styling** | [Example: Tailwind CSS or SASS/CSS Modules] | For fast and responsive design. |
+| **State Management**| [Example: Redux, Context API, or Zustand] | To manage global state and user data. |
+| **API** | Fetch / Axios | To communicate with the NestJS Backend (see the `Rockets-hack25-api` repo). |
+| **Local Storage** | LocalStorage / IndexDB | Used for simple data storage for the demonstration schema. |
+
+## Local Setup (Installation and Launch)
+
+Follow these steps to launch the frontend application on your local machine.
+
+### Prerequisites
+
+* [Node.js](https://nodejs.org/en/) (Recommended Version: v18+)
+* [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Step 1: Clone the Repository
+
+```bash
+git clone [https://github.com/MarekGromko/Rockets-hack25-frontend.git](https://github.com/MarekGromko/Rockets-hack25-frontend.git)
+cd Rockets-hack25-frontend
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Step 2: Install Dependencies
+```bash
+npm install
+# or
+yarn install
 ```
+
+### Step 3 : Envrionnment Configuration
+Create an `.env` file in the project root (if applicable) and define the variable for the Backend URL.
+
+### Step 4: Launch the Application
+Start the development server:
+```bash
+npm start
+# or
+yarn start
+```
+The application should be accessible in your browser at: http://localhost:5173
+
+**Note**: Ensure the Backend server (Rockets-hack25-api) is also running for data communication to function correctly.
+
+## Links
+Backend API (NestJS)	https://github.com/MarekGromko/Rockets-hack25-api.git
+
+
+## Author
+Marek Gromko and Karolann Mauger
