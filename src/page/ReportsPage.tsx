@@ -1,15 +1,10 @@
 import { useState, useEffect } from 'react';
 
-interface ReportsPageProps {
-    reportText?: string;
-}
-
-export default function ReportsPage({ reportText }: ReportsPageProps) {
-    const [report, setReport] = useState<string>(reportText || '');
+export default function ReportsPage() {
+    const [report,      setReport] = useState<string>('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Function to fetch report from Gemini AI
     const fetchReport = async () => {
         setIsLoading(true);
         setError(null);
@@ -41,13 +36,9 @@ export default function ReportsPage({ reportText }: ReportsPageProps) {
         }
     };
 
-    // Auto-fetch on mount if no initial report text
     useEffect(() => {
-        if (!reportText) {
-            // Uncomment to auto-fetch on mount
-            // fetchReport();
-        }
-    }, [reportText]);
+        
+    });
 
     return (
         <div className="w-full min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50 p-8">
@@ -62,41 +53,41 @@ export default function ReportsPage({ reportText }: ReportsPageProps) {
                             <p className="text-gray-600">
                                 Generated insights and analysis from Gemini AI
                             </p>
+                            <button
+                                onClick={fetchReport}
+                                disabled={isLoading}
+                                className={`px-6 py-3 mt-4 rounded-lg font-semibold transition-all shadow-lg ${
+                                    isLoading
+                                        ? 'bg-gray-400 cursor-not-allowed'
+                                        : 'bg-blue-500 hover:bg-blue-600 text-white'
+                                }`}
+                            >
+                                {isLoading ? (
+                                    <span className="flex items-center gap-2">
+                                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                                            <circle
+                                                className="opacity-25"
+                                                cx="12"
+                                                cy="12"
+                                                r="10"
+                                                stroke="currentColor"
+                                                strokeWidth="4"
+                                                fill="none"
+                                            />
+                                            <path
+                                                className="opacity-75"
+                                                fill="currentColor"
+                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                            />
+                                        </svg>
+                                        Generating...
+                                    </span>
+                                ) : (
+                                    '🔄 Generate New Report'
+                                )}
+                            </button>
                         </div>
                         
-                        <button
-                            onClick={fetchReport}
-                            disabled={isLoading}
-                            className={`px-6 py-3 rounded-lg font-semibold transition-all shadow-lg ${
-                                isLoading
-                                    ? 'bg-gray-400 cursor-not-allowed'
-                                    : 'bg-blue-500 hover:bg-blue-600 text-white'
-                            }`}
-                        >
-                            {isLoading ? (
-                                <span className="flex items-center gap-2">
-                                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                                        <circle
-                                            className="opacity-25"
-                                            cx="12"
-                                            cy="12"
-                                            r="10"
-                                            stroke="currentColor"
-                                            strokeWidth="4"
-                                            fill="none"
-                                        />
-                                        <path
-                                            className="opacity-75"
-                                            fill="currentColor"
-                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                        />
-                                    </svg>
-                                    Generating...
-                                </span>
-                            ) : (
-                                '🔄 Generate New Report'
-                            )}
-                        </button>
                     </div>
                 </div>
 
