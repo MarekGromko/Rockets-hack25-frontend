@@ -6,7 +6,7 @@
 
 Inspired by the needs of students, the application allows users to transform regular tasks like studying, sleeping, or reading into streak challenges and rewards, encouraging consistency and the establishment of solid routines.
 
-This repository contains the source code for the User Interface (Frontend) of the application, developed using [**Insert your Frontend Framework/Library here, e.g., React, Vue, Angular**].
+This repository contains the source code for the User Interface (Frontend) of the application, developed using [**React Vite**].
 
 ## Key Features (Based on Constraints)
 
