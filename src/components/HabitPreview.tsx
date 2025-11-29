@@ -7,16 +7,14 @@ interface HabitPreviewProps {
     color: HabitColors;
     streak?: number;
     onClick?: () => void;
+    interactive?: boolean;
 }
 
 export default function HabitPreview(props: HabitPreviewProps) {
-    const { title, description, color, streak, onClick } = props;
+    const { title, description, color, streak, onClick, interactive = true } = props;
 
-    return (
-        <button
-            onClick={onClick}
-            className={`text-white hover:opacity-80 active:scale-96 transition-all duration-200 flex flex-1 rounded-xl px-4 py-2 shadow-lg ${habitColors[color]} cursor-pointer`}
-        >
+    const content = (
+        <>
             <div className="flex flex-1 flex-col gap-1 text-left">
                 <div className="font-bold text-2xl">
                     {title}
@@ -29,12 +27,27 @@ export default function HabitPreview(props: HabitPreviewProps) {
             </div>
             {streak !== undefined && streak > 0 && (
                 <div className="flex items-center gap-1 ml-4">
-                    <span className="text-2xl">🔥</span>
-                    <span className="text-lg font-bold">
-                        {streak}
-                    </span>
                 </div>
             )}
-        </button>
+        </>
+    );
+
+    const baseClassName = `text-white flex flex-1 rounded-xl px-4 py-2 shadow-lg ${habitColors[color]}`;
+
+    if (interactive) {
+        return (
+            <button
+                onClick={onClick}
+                className={`${baseClassName} hover:opacity-80 active:scale-96 transition-all duration-200 cursor-pointer`}
+            >
+                {content}
+            </button>
+        );
+    }
+
+    return (
+        <div className={baseClassName}>
+            {content}
+        </div>
     );
 }

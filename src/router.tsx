@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from "react-router";
+import { createBrowserRouter, Outlet, redirect, useNavigate } from "react-router";
 import DashboardPage from "./page/DashboardPage";
 import PomodoroPage from "./page/PomodoroPage";
 import ReportsPage from "./page/ReportsPage";
@@ -6,17 +6,23 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LoginPage from "./page/LoginPage";
 import SignupPage from "./page/SignupPage";
+import { getUsername } from "./context";
 
 export default createBrowserRouter([
     {
         path: "/",
-        Component: ()=>(
-            <>
+        Component: ()=>{
+            return (<>
                 <Header/>
                 <Outlet/>
                 <Footer/>
-            </>
-        ),
+            </>);
+        },
+        loader: ()=>{
+            console.log(getUsername());
+            if(!getUsername())
+                return redirect("/signup")
+        },
         children: [
             {
                 index: true,

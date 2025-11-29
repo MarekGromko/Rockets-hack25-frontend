@@ -1,16 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { getUser } from "../api";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle login logic here
-        console.log("Login:", { username, password });
-        navigate("/");
+        try {
+            await getUser(username);
+            setUsername(username);
+            navigate("/");
+        } catch {
+            alert("Could not login!");
+        }
     };
 
     return (
@@ -79,7 +84,7 @@ export default function LoginPage() {
                                 href="/signup"
                                 className="text-blue-600 hover:text-blue-700 font-semibold"
                             >
-                                Log in
+                                Sign up
                             </a>
                         </p>
                     </form>
